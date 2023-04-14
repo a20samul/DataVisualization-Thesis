@@ -1,12 +1,20 @@
 function main() {
-    // alert("hello from index.js");
-    svgHeight = 400;
-    svgWidth = 700;
+// console.log(d3);
+//console.log(topojson);
 
-// Creates the SVG
-d3.select("body")
+  svgHeight = 400;
+    svgWidth = 1000;
+
+// Creates the SVG with its attributes
+const svg = d3.select("body")
     .append("svg")
     .attr("height", svgHeight) 
     .attr("width", svgWidth)
-    .style("background-color", "lightblue")
+    
+// Creates a SVG path from the data and maps the geographic projection
+var projection = d3.geoMiller() // to visulize map in a certain projection
+  .scale()
+  .center([,])
+  .translate([svgWidth / 2, svgHeight / 2]);
+var path = d3.geoPath(projection); // converts data into SVG paths    
 }
