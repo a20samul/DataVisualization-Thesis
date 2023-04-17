@@ -13,8 +13,8 @@ svg {
     background-color: lightblue;
     box-shadow: 2px 3px 10px #a3a1a1;
 }
+
 path {
     stroke: #000000;
     stroke-width: 0.5px;
 }
-
