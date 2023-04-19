@@ -10,8 +10,8 @@ body {
 }  
 
 #myCanvas {
-    height: 400;
-    width: 1000;
+    height: 400px;
+    width: 1000px;
     background-color: lightblue;
     box-shadow: 2px 3px 10px #a3a1a1;
 }
