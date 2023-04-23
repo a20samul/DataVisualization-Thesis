@@ -10,11 +10,27 @@ body {
 }
 
 svg {
+    position: relative;
     background-color: lightblue;
     box-shadow: 2px 3px 10px #a3a1a1;
 }
 
 path {
-    stroke: #000000;
+    stroke: black;
     stroke-width: 0.5px;
+}
+
+.hoveringMap {
+    fill: yellow;
+}
+
+#heading {
+    position: absolute;
+    background-color: #E3DBD9;
+    padding: 10px;
+    top: 5px;
+    z-index: 1;
+    width: max-content;
+    font-size:22px;
+    color: #393838
 }
