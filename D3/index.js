@@ -1,13 +1,13 @@
 function main() {
+  svgHeight = 450;
+  svgWidth = 1000;
+
   // Loads the data asynchronously
   d3.queue()
-    .defer(d3.json, "sweden.geojson")
-    .defer(d3.csv, "", // Add data 
-      function (d) { map.set(d.code, +d.pop); })
-    .await(drawMap);
-
-  svgHeight = 400;
-  svgWidth = 1000;
+  // .defer(d3.json, "countiesSWE.geojson")
+  .defer(d3.json, "sweden.geojson")
+  .defer(d3.csv, "swelan.csv" ,function (d) { map.set(d.name, +d.population); })
+  .await(drawMap);
 
   // Creates the SVG with its attributes
   const svg = d3.select("body")
@@ -17,7 +17,7 @@ function main() {
 
   // Adds a g (container for grouping elements) to the SVG   
   let g = svg.append("g")
-
+  
   // Creates a SVG path from the data and maps the geographic projection
   var projection = d3.geoMiller() // to visulize map in a certain projection
     .scale(1000)
@@ -27,24 +27,32 @@ function main() {
   var geoPath = d3.geoPath(projection);
 
   // Color scheme of the map
-  var mapColors = ["palegreen", "lightgreen", "lawngreen", "green", "darkgreen"];
+  var color = d3.scaleLinear()
+  .domain([130000, 150000, 230000, 250000, 310000, 340000, 600000, 1000000, 2300000])
+  .range(d3.schemeGreens[9]);
 
   // Creates a placeholder for a map
   var map = d3.map();
 
   // Function which draws the map after the data has been loaded
-  function drawMap(error, topojson) {
+  function drawMap(error, data, population) {
     g.selectAll("path")
-      .data(topojson.features)
-      .enter()
+      .data(data.features)
+      .enter() 
       .append("path")
       // Draws the paths
-      .attr("d", geoPath)
-      // Assigns colour from the color scheme
-      .attr("fill", function (d) {
-        {
-          return mapColors[d.properties.color];
-        }
-      });
+        .attr("d", geoPath)
+        // Assigns colour from the color scheme
+        .attr("fill", function (d) {
+          {         
+            d.allAreas = map.get(d.properties.name) || 0;
+            return color(d.allAreas);        }
+        })
+        .on("mouseover", function(d)  {
+          d3.select(this).classed("hoverArea", true)
+        })
+        .on("mouseleave", function(d)  {
+          d3.select(this).classed("hoverArea", false)
+        });
   }
 }
