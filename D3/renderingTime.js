@@ -2,6 +2,9 @@
 const timeMeasurement = window.performance.timing;
 // String which will hold the data values
 var renderingData = "";
+// seed to be able to generate same sequence
+//var seed = 1;
+var iterations;
 
 // To be able to retrieve values after the page has been loaded
 window.addEventListener('load', function() {
@@ -11,8 +14,19 @@ window.addEventListener('load', function() {
     }
     renderingData += window.localStorage.getItem("renderingData");
 
-    getData();
-});
+    // If the value of iteration is null then it is set to 0 and retrieved  
+    if (window.localStorage.getItem("iterations") === null) {
+        window.localStorage.setItem("iterations", 0);
+    }
+    iterations = window.localStorage.getItem("iterations");
+    
+    if(iterations < 10){
+        // Runs the function which contains the time measurements
+        getData();
+    }else{
+        alert("10 iterations done!")
+    }
+    });
 
 // Function for retrieving time measurements 
 function getData(){
@@ -26,14 +40,8 @@ function getData(){
     renderingData += renderingTime;
     // Stores the value in localstorage
     localStorage.setItem("renderingData", renderingData + ", \n");
-
-    console.log(timeMeasurement);
-    console.log(renderStart);
-    console.log(renderEnd);
-    console.log(renderEnd-renderStart);
-    console.log("rendering time: " + renderingTime);
+    // Stores the incremented value of iterations in localStorage
+    localStorage.setItem("iterations", ++iterations);
     // Reloads the window
-    //window.location.reload();
-    
-
+    window.location.reload();
 }
