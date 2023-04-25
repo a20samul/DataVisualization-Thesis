@@ -24,7 +24,21 @@ window.addEventListener('load', function() {
         // Runs the function which contains the time measurements
         getData();
     }else{
-        alert("10 iterations done!")
+        // Export csv file
+        // Creates a link
+        const downloadLink = document.createElement("a");
+        // Creating a new blob containing the data values 
+        const fileContent = new Blob([renderingData],{type:'text/plain'});
+        // Creates the download link 
+        downloadLink.href = URL.createObjectURL(fileContent);
+        // Downloads the csv data through the link
+        downloadLink.download='file.csv';
+        // Adds the link to the body and clicks it
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        // Removes the link from the body
+        document.body.removeChild(downloadLink);
+
     }
     });
 
