@@ -1,4 +1,3 @@
-function main() {
   svgHeight = 450;
   svgWidth = 1000;
 
@@ -55,4 +54,3 @@ function main() {
           d3.select(this).classed("hoverArea", false)
         });
   }
-}
