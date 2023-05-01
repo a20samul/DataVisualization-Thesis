@@ -33,8 +33,14 @@
   // Creates a placeholder for a map
   var map = d3.map();
 
+  // Creates a tooltip
+  const tooltip = d3.select("body")
+    .append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
   // Function which draws the map after the data has been loaded
-  function drawMap(error, data, population) {
+  function drawMap(error, data) {
     g.selectAll("path")
       .data(data.features)
       .enter() 
@@ -44,13 +50,25 @@
         // Assigns colour from the color scheme
         .attr("fill", function (d) {
           {         
-            d.allAreas = map.get(d.properties.name) || 0;
-            return color(d.allAreas);        }
-        })
+            d.population = map.get(d.properties.name);
+            return color(d.population);        }
+        }) // Adds hovering effect and tooltip on mouseover
         .on("mouseover", function(d)  {
-          d3.select(this).classed("hoverArea", true)
-        })
+          d3.select(this).classed("hoverArea", true);
+          tooltip
+            .style("opacity", 1)
+            .style("top", (d3.event.pageY + 14) + "px")
+            .style("left", (d3.event.pageX + 22) + "px")
+            .transition()
+            .duration(300)
+            .text("Befolkningsmängd " + d.properties.name + ': ' + d.population);
+      }
+      ) // Removes hovering effect and tooltip on mouseleave
         .on("mouseleave", function(d)  {
-          d3.select(this).classed("hoverArea", false)
+          d3.select(this).classed("hoverArea", false);
+          tooltip
+            .transition()
+            .duration(500)
+            .style("opacity", 0);
         });
   }

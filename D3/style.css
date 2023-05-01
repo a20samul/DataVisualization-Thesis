@@ -63,5 +63,17 @@ path {
   }
 
 .hoverArea {
-    fill: yellow;
+    fill: #efd72e;
 }  
+
+div.tooltip {   
+    position: absolute;
+    padding: 10px;
+    background-color: white;
+    color: #666;
+    font-size: 18px;
+    border: 1px solid lightgreen;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+  } 
