@@ -2,8 +2,9 @@
 const timeMeasurement = window.performance.timing;
 // String which will hold the data values
 var renderingData = "";
-// seed to be able to generate same sequence
+// seed to be able to generate same sequence (no new data is generated, same data is used each time so uncessesary?)
 //var seed = 1;
+// Will hold the number of iterations performed
 var iterations;
 
 // To be able to retrieve values after the page has been loaded
@@ -20,7 +21,7 @@ window.addEventListener('load', function() {
     }
     iterations = window.localStorage.getItem("iterations");
     
-    if(iterations < 10){
+    if(iterations < 100){
         // Runs the function which contains the time measurements
         getData();
     }else{
@@ -32,7 +33,7 @@ window.addEventListener('load', function() {
         // Creates the download link 
         downloadLink.href = URL.createObjectURL(fileContent);
         // Downloads the csv data through the link
-        downloadLink.download='file.csv';
+        downloadLink.download='ECharts.csv';
         // Adds the link to the body and clicks it
         document.body.appendChild(downloadLink);
         downloadLink.click();
@@ -44,7 +45,7 @@ window.addEventListener('load', function() {
 // Function for retrieving time measurements 
 function getData(){
     // Retrieves the value right before DOM has loaded
-    renderStart = timeMeasurement.responseEnd;
+    renderStart = timeMeasurement.domLoading;
     // Retrieves the value after the DOM content has loaded
     renderEnd = timeMeasurement.domContentLoadedEventEnd;
     // Calculates the rendering time

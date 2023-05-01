@@ -20,7 +20,7 @@ window.addEventListener('load', function() {
     }
     iterations = window.localStorage.getItem("iterations");
     
-    if(iterations < 10){
+    if(iterations < 100){
         // Runs the function which contains the time measurements
         getData();
     }else{
@@ -32,20 +32,19 @@ window.addEventListener('load', function() {
         // Creates the download link 
         downloadLink.href = URL.createObjectURL(fileContent);
         // Downloads the csv data through the link
-        downloadLink.download='file.csv';
+        downloadLink.download='d3.csv';
         // Adds the link to the body and clicks it
         document.body.appendChild(downloadLink);
         downloadLink.click();
         // Removes the link from the body
         document.body.removeChild(downloadLink);
-
     }
     });
 
 // Function for retrieving time measurements 
 function getData(){
     // Retrieves the value right before DOM has loaded
-    renderStart = timeMeasurement.responseEnd;
+    renderStart = timeMeasurement.domLoading;
     // Retrieves the value after the DOM content has loaded
     renderEnd = timeMeasurement.domContentLoadedEventEnd;
     // Calculates the rendering time
