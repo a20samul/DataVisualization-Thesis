@@ -16,6 +16,7 @@ svg {
 }
 
 path {
+    /*stroke: black;*/
     stroke: black;
     stroke-width: 0.5px;
 }
@@ -38,7 +39,7 @@ path {
 #legendScale {
     position: absolute;
     z-index: 4;
-    top: 275px;
+    top: 600px;
     left:20px;
 }
 
