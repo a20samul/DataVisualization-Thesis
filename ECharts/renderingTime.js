@@ -21,7 +21,7 @@ window.addEventListener('load', function() {
     }
     iterations = window.localStorage.getItem("iterations");
     
-    if(iterations < 100){
+    if(iterations < 1000){
         // Runs the function which contains the time measurements
         getData();
     }else{
