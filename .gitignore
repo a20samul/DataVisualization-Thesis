@@ -9,3 +9,6 @@ ECharts/worldmap.geojson
 ECharts/echarts.js
 D3/countydata.csv
 D3/us-county-boundaries.geojson
+ECharts/us-county-boundaries.geojson
+ECharts/countydata.csv
+ECharts/echarts.js

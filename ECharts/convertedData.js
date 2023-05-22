@@ -12,7 +12,7 @@ if (window.localStorage.getItem("dataStructure") === null) {
 dataStructure += window.localStorage.getItem("dataStructure");
 
 // Function which will provide the data with the correct structure
-d3.csv("population-and-demography.csv", function(data) {    
+d3.csv("countydata.csv", function(data) {    
     // A forEach loop that will iterate the data needed from the CSV-file and grant the correct structure
     data.forEach(function(d) {
     populationData = ("{ name: " + "'"+d.name+"'" + ", " + "value: " + d.value + " }" + ", ");
